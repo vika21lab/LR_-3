@@ -1,0 +1,53 @@
+from tkinter import
+
+def solve_item():
+    x0=float(entry_x0.get ())
+    xk = float (entry_xk.get())
+    dx = float (entry_dx.get ())
+    b = float (entry_b.get ())
+    x = x0
+    while x <= xk:
+        y = 15.28 * (x**(-3/2)) + math.cos(math.log(x)+b)
+        box.insert(END,  f"x=(round {(x, 2)} y={(round (y, 2))}")
+        x += dx
+
+def clear_list():
+    select = list (box.curselection ())
+    select.reverse()
+    for i in select:
+        box.delete (i)
+
+
+def save_list():
+    f = open ('var0.txt' , 'w')
+    f.writelines("\n".join (box.get (0, END)))
+    f.close ()
+
+root = Tk()
+root.title("практическая№3")
+root.geometry("500x300")
+box = Listbox(selectmode=EXTENDED, width=60)
+box.pack(side=LEFT,)
+scroll = Scrollbar(command=box.yview)
+scroll.pack(side=LEFT, fill=Y)
+box.config (yscrollcommand=scroll.set)
+f = Frame ()
+f.pack(side=LEFT,padx=10)
+fl = Frame (f)
+fl.pack(side=LEFT, padx=10)
+Label(f1, text="x0=").pack()
+entry_x0 = Entry(fl)
+entry_x0.pack(pady=5)
+Label(fl, text="xk=").pack()
+entry_xk = Entry(f1)
+entry_xk.pack(pady=5)
+Label (fl, text="dx=").pack()
+entry_dx = Entry(fl)
+entry_dx.pack (pady=5)
+Label(f1, text="A=").pack()
+entry_a = Entry(fl)
+entry_a.pack (pady=5)
+Button(f, text="Решить", command=solve_item).pack(fill=X)
+Button(f, text="Удалить", command-clear list).pack(fill-X)
+Button(f, text="Сохранить", command-save list).pack(fill=X)
+root.mainloop()
